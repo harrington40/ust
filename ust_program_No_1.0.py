@@ -1,21 +1,16 @@
-from collections import Counter
+import re
+class PassWordChecker:
 
-class WordFrequency:
-    def __init__(self) -> None:
-        pass
+def check_password_validity(passwords):
+    valid_passwords = []
 
-    def word_frequency(input_string):
-        # Split the inpout into words
-        words = input_string.split()
-    
-        # Count the frequency of each word
-        word_count = Counter(words)
+    # Split the input sequence of passwords
+    password_list = passwords.split(',')
 
-        # Sort the dictionary by keys alphanumerically
-        sorted_word_count = dict(sorted(word_count.item()))   
+    for password in password_list:
+        # Check the criteria using regular expressions
+        if re.match(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$#@]).{6,12}$', password):
+            valid_passwords.append(password)
 
-        # Display the results
-        for word, frequency in sorted_word_count.item():
-            print(f'{word}: {frequency}')
-
-    
+    # Print the valid passwords separated by a comma
+    print(','.join(valid_passwords))
